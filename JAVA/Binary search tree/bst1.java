@@ -9,9 +9,10 @@ class bstp{
   public Node insert(Node node,int val){
 
     if(node == null){
+      
 
       return getNewNode(val);
-      
+
     }
 
     if(val < node.data){
