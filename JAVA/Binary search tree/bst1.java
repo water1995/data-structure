@@ -10,9 +10,7 @@ class bstp{
 
     if(node == null){
       
-
       return getNewNode(val);
-
     }
 
     if(val < node.data){
@@ -32,6 +30,61 @@ class bstp{
     newNode.left = null;
     newNode.right = null;
     return newNode;
+  }
+
+  public Node delete(Node node,int val){
+
+    if(node == null){
+      return null;
+    }
+
+    if(val < node.data){
+
+      node.left = delete(node.left,val);
+    }
+    else if(val > node.data){
+
+      node.right = delete(node.right,val);
+    }
+    else{
+
+      if(node.left == null || node.right == null){
+
+        Node temp = null;
+        temp = node.left != null ? node.left : node.right;
+
+        if(temp == null){
+          return null
+        }
+        else{
+          return temp;
+        }
+      }
+      else{
+
+        Node successor = getSuccessor(node);
+        node.data = successor.data;
+
+        node.right = delete(node.right,successor.data);
+
+        return node;
+      }
+    }
+    return node;
+  }
+
+  public Node getSuccessor(Node node){
+
+    if(node == null){
+      return null;
+    }
+
+    Node temp = node.right;
+    while(temp.left != null){
+      temp = temp.left;
+    }
+
+    return temp;
   }
 
   public void inOrder(Node node){
